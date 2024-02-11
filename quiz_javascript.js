@@ -4,3 +4,80 @@ async function getQuestion() {
     console.log(questions);
 }getQuestion();
 
+class Quiz {
+    constructor(){
+        this.score = 0;
+
+    }
+
+    quizStart() {
+
+
+    }
+
+    nextQuestion(){
+
+    }
+
+    getScore() {
+        return this.score;
+    }
+}
+
+class Question{
+    constructor(text, choices, answer) {
+        this.text = text;
+        this.choices = choices;
+        this.answer = answer;
+    }
+
+}
+
+class User {
+    constructor (username) {
+        this.username = username;
+        this.scoreHistory = [];
+    }
+
+    // function to add score
+
+    // function to display
+
+}
+
+let question_bank = [];
+
+async function fetchData(){
+
+    try {
+
+        // fetch will return a response object and we need to await the promise from fetch
+        // here we grab all our questions
+        const response = await fetch("https://opentdb.com/api.php?amount=25&category=15&type=multiple");
+
+        // once the promise from fetch resolves we need to see if it is okay
+        // if we cant locate resource
+        if(!response.ok){
+            throw new Error("Could not fetch resource");
+        }
+
+        // we take our response and put it into data (we convert it to json)
+        // we wait because response returns a promise
+        const data = await response.json();
+
+        question_bank = data.results;
+
+    } catch (error) {
+        console.error(error);
+    }
+} fetchData();
+
+
+// Initialize user
+let user = new User;
+
+// Initialize a quiz
+let quiz = new Quiz;
+
+
+
