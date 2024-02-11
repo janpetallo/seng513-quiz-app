@@ -27,7 +27,7 @@ header{
 
     /* Create inner box and curve the edges*/
     width: 80vw;
-    height: 50vh;
+    height: 75vh;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     background-color: #000d34;
