@@ -1,5 +1,7 @@
 :root {
     --default-f-clr: white;
+    --primary-bg-clr: #474F7A;
+    --secondary-bg-clr: #000d34;
 }
 
 body {
@@ -12,7 +14,7 @@ header{
 }
 
 .outer-container{
-    background-color: #474F7A;
+    background-color: var(--primary-bg-clr);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,7 +32,7 @@ header{
     height: 75vh;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background-color: #000d34;
+    background-color: var(--secondary-bg-clr);
 }
 
 .answers-grid {
