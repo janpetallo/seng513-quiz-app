@@ -1,28 +1,27 @@
-async function getQuestion() {
-    const response = await fetch("https://opentdb.com/api.php?amount=25&category=15&type=multiple");
-    const questions = await response.json();
-    console.log(questions);
-    question.innerHTML= questions.results[1].question;
-}getQuestion();
-
 class Quiz {
     constructor(){
         this.score = 0;
-
-    }
+        this.questionCounter = 1;
+    };
 
     quizStart() {
 
 
-    }
-
+    };
+    
     nextQuestion(){
-
-    }
+        this.questionCounter++;  
+        console.log(this.questionCounter);
+    };
 
     getScore() {
         return this.score;
-    }
+    };
+    
+    getQuestionNumber(){
+        return this.questionCounter;
+    };
+    
 }
 
 class Question{
@@ -31,7 +30,6 @@ class Question{
         this.choices = choices;
         this.answer = answer;
     }
-
 }
 
 class User {
@@ -79,6 +77,22 @@ let user = new User;
 
 // Initialize a quiz
 let quiz = new Quiz;
+
+
+
+// Declaring the html document variables
+let nextQuestionButton;
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Wait for the DOM content to be fully loaded before instantiating the document variables
+    nextQuestionButton = document.getElementById("next-question");
+
+    // Event listeners
+    nextQuestionButton.addEventListener("click", function() {
+        quiz.nextQuestion();
+    });
+});
 
 
 
