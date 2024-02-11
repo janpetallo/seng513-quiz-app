@@ -2,6 +2,7 @@
     --default-f-clr: white;
     --primary-bg-clr: #474F7A;
     --secondary-bg-clr: #000d34;
+    --accent-clr: #FC6736;
 }
 
 body {
@@ -11,6 +12,11 @@ body {
 header{
     color: black;
     text-align: center;
+}
+
+.question-num {
+    width: 50vw;
+    border-bottom: 3px solid var(--accent-clr);
 }
 
 .outer-container{
@@ -35,14 +41,42 @@ header{
     background-color: var(--secondary-bg-clr);
 }
 
-.answers-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-gap: 10px;
+.question-text {
+    padding: 2rem;
 }
+
+.answers-button {
+    display: flex;
+    flex-direction: column;
+}
+
+.a-btns {
+    width: 50vw;
+    text-align: left;
+    border-radius: 8px;
+    margin: 0.8rem 0; /* Spacing between buttons vertically */
+    padding: 1.5rem; /* top/bot and left and right */
+}
+
+.a-btns:hover {
+    color: var(--default-f-clr);
+    background-color: var(--accent-clr);
+}
+
 .button-container{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+.s-btn {
+    width: 30vw;
+    border-radius: 8px;
+    margin-top: 1rem;
+    padding: 0.5rem;
+}
+
+.s-btn:hover {
+    color: var(--default-f-clr);
+    background-color: var(--accent-clr);
 }
