@@ -1,53 +1,41 @@
-body{
-    height: 97vh;
-    border: 5px solid blue;
-    background-color: grey;
+:root {
+    --default-f-clr: white;
 }
+
+body {
+    color: var(--default-f-clr);
+}
+
 header{
+    color: black;
     text-align: center;
-    border: 7px solid rgb(0, 255, 0);
 }
-h2{
-    padding: 20px;
-}
-.outer-flex{
+
+.outer-container{
+    background-color: #474F7A;
     display: flex;
-    flex-direction: column;
-    height: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
+
 .quiz-container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: fit-content;
-    width: 45%;
-    background-color: rgb(183, 183, 183);
-    border: 3px solid black;
+
+    /* Create inner box and curve the edges*/
+    width: 80vw;
+    height: 50vh;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #000d34;
 }
 
-.outer-container{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-
-    align-items: center;
-
-    height: 100%;
-    border: 5px solid red;
-}
-ul{
-    list-style-type: none;
-    padding: 20px;
-
-}
-li{
-    color: white;
-    background-color: rgb(84, 84, 84);
-    text-align: left;
-    float: left; 
-    border: 3px solid rgb(0, 0, 0);
-    border-radius: 3px;
-    width:100%;
-    margin: 2px;
+.answers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 10px;
 }
