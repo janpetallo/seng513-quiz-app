@@ -21,7 +21,7 @@ h2 {
 }
 
 .question-num {
-    width: 50vw;
+    width: 40vw;
     border-bottom: 3px solid var(--accent-clr);
 }
 
@@ -30,7 +30,7 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+
 }
 
 .quiz-container{
@@ -38,17 +38,23 @@ h2 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    /*padding: 5rem 0;*/
 
     /* Create inner box and curve the edges*/
-    width: 80vw;
-    height: 75vh;
+    /*width: 80vw;*/
+    width: 80%;
+    /*height: 90vh;*/
+    /*width:80%;*/
+    height: 95%;
+    border: 3px solid green;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     background-color: var(--secondary-bg-clr);
 }
 
 .question-text {
-    padding: 2rem;
+    /*padding: 2rem;*/
+    word-break: break-word;
 }
 
 .answers-button {
@@ -69,20 +75,32 @@ h2 {
     background-color: var(--accent-clr);
 }
 
-.button-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
+/*.button-container{*/
+/*    !*display: flex;*!*/
+/*    !*flex-direction: row;*!*/
+/*    !*justify-content: space-evenly;*!*/
+/*}*/
 
 .s-btn {
     width: 30vw;
     border-radius: 8px;
     margin-top: 1rem;
     padding: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .s-btn:hover {
     color: var(--default-f-clr);
     background-color: var(--accent-clr);
 }
+.question-container{
+    border: 2px solid red;
+    display: flex;
+    text-align: center;
+    /*justify-content: center;*/
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.score{}
