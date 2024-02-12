@@ -30,8 +30,6 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-
 }
 
 .quiz-container{
@@ -39,23 +37,23 @@ h2 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    /*padding: 5rem 0;*/
+    margin-top: 2rem;
 
     /* Create inner box and curve the edges*/
-    /*width: 80vw;*/
     width: 80%;
-    /*height: 90vh;*/
-    /*width:80%;*/
     height: 95%;
     border: 3px solid green;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     background-color: var(--secondary-bg-clr);
+    margin-bottom: 5rem;
 }
 
 .question-text {
     /*padding: 2rem;*/
     word-break: break-word;
+    margin: 0;
+    padding:0;
 }
 
 .answers-button {
@@ -76,12 +74,6 @@ h2 {
     background-color: var(--accent-clr);
 }
 
-/*.button-container{*/
-/*    !*display: flex;*!*/
-/*    !*flex-direction: row;*!*/
-/*    !*justify-content: space-evenly;*!*/
-/*}*/
-
 .s-btn {
     width: 30vw;
     border-radius: 8px;
@@ -101,7 +93,5 @@ h2 {
     /*justify-content: center;*/
     align-items: center;
     flex-direction: column;
-
 }
 
-.score{}
