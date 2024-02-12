@@ -11,7 +11,7 @@ class Quiz {
     
     nextQuestion(){
         this.questionCounter++;  
-        console.log(this.questionCounter);
+        
     };
 
     getScore() {
@@ -19,7 +19,7 @@ class Quiz {
     };
     
     getQuestionNumber(){
-        return this.questionCounter;
+        return "Question Number: " + this.questionCounter.toString() + " / 10";
     };
     
 }
@@ -81,16 +81,25 @@ let quiz = new Quiz;
 
 
 // Declaring the html document variables
-let nextQuestionButton;
+let nextQuestionButton, questionNumberField;
 
 
 document.addEventListener("DOMContentLoaded", function() {
     // Wait for the DOM content to be fully loaded before instantiating the document variables
     nextQuestionButton = document.getElementById("next-question");
-
+    questionNumberField = document.getElementById("question-num");
+    
+    // Upon webpage startup
+    // Update question number field upon page startup
+    questionNumberField.textContent = quiz.getQuestionNumber();
+    
     // Event listeners
     nextQuestionButton.addEventListener("click", function() {
+        // get next question
         quiz.nextQuestion();
+        
+        // update question number
+        questionNumberField.textContent = quiz.getQuestionNumber();
     });
 });
 
