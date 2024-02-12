@@ -87,7 +87,7 @@ let nextQuestionButton, questionNumberField;
 document.addEventListener("DOMContentLoaded", function() {
     // Wait for the DOM content to be fully loaded before instantiating the document variables
     nextQuestionButton = document.getElementById("next-question");
-    questionNumberField = document.getElementById("question-num");
+    questionNumberField = document.getElementById("questionNumField");
     
     // Upon webpage startup
     // Update question number field upon page startup
