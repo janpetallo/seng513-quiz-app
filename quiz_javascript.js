@@ -87,8 +87,24 @@ async function fetchData(){
 
 
 function updateQuestionField() {
-    // Update the question field with the current question based on the question number
-    document.getElementById("question").innerHTML = question_bank[quiz.questionCounter - 1].text;
+    // get the current question from the question bank
+    let question = question_bank[quiz.questionCounter - 1];
+    
+    // display the question based on the question number
+    document.getElementById("question").innerHTML = question.text;
+    
+    // correct answer
+    let correctAnswer = question.answer;
+    // incorrect answers
+    let choices = question.choices;
+    // randomly shuffle the choices (correct answer is included in the choices array)
+    choices.splice(Math.floor(Math.random() * (choices.length + 1)), 0, correctAnswer);
+
+    // display options
+    let option1 = document.getElementById("btn1").textContent = choices[0];
+    let option2 = document.getElementById("btn2").textContent = choices[1];
+    let option3 = document.getElementById("btn3").textContent = choices[2];
+    let option4 = document.getElementById("btn4").textContent = choices[3];
 }
 
 
