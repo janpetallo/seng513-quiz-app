@@ -48,6 +48,8 @@ button {
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     background-color: var(--secondary-bg-clr);
+
+    margin: 0.5rem;
 }
 
 .score-container {
@@ -60,7 +62,6 @@ button {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 2rem;
 }
 
 /*.question-container{*/
@@ -125,4 +126,10 @@ button {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+
+.difficulty-container {
+    padding: 1rem;
+    text-align: center;
+    box-sizing: border-box; /* to include the padding in dimensions */
 }

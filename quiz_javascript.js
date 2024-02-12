@@ -2,6 +2,7 @@ class Quiz {
     constructor(){
         this.score = 0;
         this.questionCounter = 1;
+        this.difficulty = 'easy';
     };
 
     quizStart() {
@@ -21,7 +22,10 @@ class Quiz {
     getQuestionNumber(){
         return "Question Number: " + this.questionCounter.toString() + " / 10";
     };
-    
+
+    setDifficulty(difficulty){
+        this.difficulty = difficulty;
+    }
 }
 
 class Question{
@@ -104,4 +108,13 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+// Getting difficulty
+// Retrieve the radio buttons group difficulty
+let radioButtons = document.getElementsByName('difficulty');
 
+// Add event listener to each radio button
+radioButtons.forEach(function(radioButton) {
+    radioButton.addEventListener('change', function() {
+        quiz.setDifficulty(radioButton.value);
+    });
+});
