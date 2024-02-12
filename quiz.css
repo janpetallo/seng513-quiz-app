@@ -1,9 +1,10 @@
 :root {
-    --default-light-f-clr: white;
-    --default-dark-f-clr: black;
+    --light-f-clr: white;
+    --dark-f-clr: black;
     --primary-bg-clr: #474F7A;
     --secondary-bg-clr: #000d34;
     --accent-clr: #FC6736;
+    --header-clr: #ffffff;
     --ff: "Roboto", sans-serif;
 }
 
@@ -13,8 +14,9 @@
 }
 
 body {
+    background-color: var(--primary-bg-clr);
     font-size: clamp(1rem, 1rem + 0.15vw, 1.3rem);
-    color: var(--default-light-f-clr);
+    color: var(--light-f-clr);
     font-family: var(--ff);
 }
 
@@ -24,25 +26,31 @@ button {
 }
 
 .header-container{
+    background-color: var(--header-clr);
     font-size: clamp(1rem, 1rem + 0.5vw, 2rem);
-    color: var(--default-dark-f-clr);
+    color: var(--dark-f-clr);
     text-align: center;
     padding: 1rem;
 }
 
 .outer-container{
-    background-color: var(--primary-bg-clr);
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
     padding: 1rem;
 }
 
-.score-container {
-    width: 90%;
+.general-container {
+    /* Create inner box and curve the edges*/
+    width: 80%;
+    height: 95%;
+    /*border: 3px solid green;*/
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: var(--secondary-bg-clr);
+}
+
+.score-container {
     background-color: var(--accent-clr);
 }
 
@@ -53,14 +61,6 @@ button {
     align-items: center;
     flex-direction: column;
     margin: 2rem;
-
-    /* Create inner box and curve the edges*/
-    width: 80%;
-    height: 95%;
-    /*border: 3px solid green;*/
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background-color: var(--secondary-bg-clr);
 }
 
 /*.question-container{*/
@@ -101,7 +101,7 @@ button {
 }
 
 .a-btns:hover {
-    color: var(--default-light-f-clr);
+    color: var(--light-f-clr);
     background-color: var(--accent-clr);
 }
 
@@ -113,8 +113,16 @@ button {
 }
 
 .s-btn:hover {
-    color: var(--default-light-f-clr);
+    color: var(--light-f-clr);
     background-color: var(--accent-clr);
 }
 
+.score-history-container h2 {
+    text-align: center;
+}
 
+.user-scores-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
