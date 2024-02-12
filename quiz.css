@@ -21,7 +21,7 @@ h2 {
 }
 
 .question-num {
-    width: 50vw;
+    width: 40vw;
     border-bottom: 3px solid var(--accent-clr);
 }
 
@@ -40,8 +40,10 @@ h2 {
     flex-direction: column;
 
     /* Create inner box and curve the edges*/
-    width: 80vw;
-    height: 75vh;
+    /*width: 80vw;*/
+    /*height: 75vh;*/
+    width:80%;
+    height: 75%;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     background-color: var(--secondary-bg-clr);
@@ -69,20 +71,30 @@ h2 {
     background-color: var(--accent-clr);
 }
 
-.button-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
+/*.button-container{*/
+/*    !*display: flex;*!*/
+/*    !*flex-direction: row;*!*/
+/*    !*justify-content: space-evenly;*!*/
+/*}*/
 
 .s-btn {
     width: 30vw;
     border-radius: 8px;
     margin-top: 1rem;
     padding: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .s-btn:hover {
     color: var(--default-f-clr);
     background-color: var(--accent-clr);
 }
+.question-container{
+    display: flex;
+    text-align: center;
+    /*justify-content: center;*/
+    align-items: center;
+
+}
+
+.score{}
