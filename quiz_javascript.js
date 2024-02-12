@@ -30,6 +30,10 @@ class Question{
         this.choices = choices;
         this.answer = answer;
     }
+    
+    getQuestion(){
+        return this.text;
+    }
 }
 
 class User {
@@ -63,8 +67,12 @@ async function fetchData(){
         // we take our response and put it into data (we convert it to json)
         // we wait because response returns a promise
         const data = await response.json();
-
-        question_bank = data.results;
+        
+        for (let i = 0; i<data.results.length; i++) {
+            const questionData = data.results[i];
+            const question = new Question(questionData.question, questionData.incorrect_answers, questionData.correct_answer);
+            question_bank.push(question);
+        }
 
     } catch (error) {
         console.error(error);
@@ -81,17 +89,24 @@ let quiz = new Quiz;
 
 
 // Declaring the html document variables
-let nextQuestionButton, questionNumberField;
+let nextQuestionButton, questionNumberField, questionField;
 
 
 document.addEventListener("DOMContentLoaded", function() {
     // Wait for the DOM content to be fully loaded before instantiating the document variables
     nextQuestionButton = document.getElementById("next-question");
     questionNumberField = document.getElementById("questionNumField");
+    questionField = document.getElementById("question");
+    
+    
     
     // Upon webpage startup
+    
     // Update question number field upon page startup
     questionNumberField.textContent = quiz.getQuestionNumber();
+  
+    
+    
     
     // Event listeners
     nextQuestionButton.addEventListener("click", function() {
