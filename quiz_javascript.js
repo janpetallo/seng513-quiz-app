@@ -15,7 +15,7 @@ class Quiz {
     };
 
     getScore() {
-        return this.score;
+        return this.score.toString() + " / 10";
     };
     
     getQuestionNumber(){
