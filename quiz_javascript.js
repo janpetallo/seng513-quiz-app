@@ -8,15 +8,25 @@ class Quiz {
 
 
     };
-    
+
+
     nextQuestion(){
-        this.questionCounter++;  
-        
+        // stop game after 10'th question
+        if(quiz.questionCounter >= 10){
+            document.getElementById("question").innerHTML = "Quiz Finished!"
+        }else{
+            this.questionCounter++;
+            updateQuestionField();
+        }
     };
 
     getScore() {
         return this.score.toString() + " / 10";
     };
+
+    increaseScore(){
+        this.score++;
+    }
     
     getQuestionNumber(){
         return "Question Number: " + this.questionCounter.toString() + " / 10";
