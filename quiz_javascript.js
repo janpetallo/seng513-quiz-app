@@ -26,6 +26,8 @@ class Quiz {
 
     increaseScore(){
         this.score++;
+        // update the score field
+        scoreField.textContent = this.getScore();
     }
     
     getQuestionNumber(){
@@ -109,13 +111,30 @@ function updateQuestionField() {
     // randomly shuffle the choices (correct answer is included in the choices array)
     choices.splice(Math.floor(Math.random() * (choices.length + 1)), 0, correctAnswer);
 
-    // display options
-    let option1 = document.getElementById("btn1").innerHTML = `A) ${choices[0]}`;
-    let option2 = document.getElementById("btn2").innerHTML = `B) ${choices[1]}`;
-    let option3 = document.getElementById("btn3").innerHTML = `C) ${choices[2]}`;
-    let option4 = document.getElementById("btn4").innerHTML = `D) ${choices[3]}`;
+    // display buttons
+    A_button.innerHTML = `A) ${choices[0]}`;
+    B_button.innerHTML = `B) ${choices[1]}`;
+    C_Button.innerHTML = `C) ${choices[2]}`;
+    D_Button.innerHTML = `D) ${choices[3]}`;
 }
 
+// Function to check if the user's selected answer is correct
+function checkAnswer(selectedAnswer, correctAnswer) {
+    if (selectedAnswer === correctAnswer) {
+        // Increase score if the selected answer is correct
+        quiz.increaseScore();
+    }
+}
+
+// Function to extract answer text from HTML string, incase some answers have those weird html tags
+function convertedAnswerText(answerHTML) {
+    // Create a temporary element to hold the HTML string
+    let tempElement = document.createElement("div");
+    // user inner html to remove weird symbols
+    tempElement.innerHTML = answerHTML;
+    // Return the text content of the temporary element, there is an or here incase some browsers can't get text content
+    return tempElement.textContent || tempElement.innerText;
+}
 
 
 
@@ -127,15 +146,18 @@ let quiz = new Quiz;
 
 
 // Declaring the html document variables
-let nextQuestionButton, questionNumberField, scoreField;
+let nextQuestionButton, questionNumberField, scoreField, A_button, B_button, C_Button, D_Button;
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Wait for the DOM content to be fully loaded before instantiating the document variables
+    // Wait for the DOM content to be fully loaded before instantiating the document components
     nextQuestionButton = document.getElementById("next-question");
     questionNumberField = document.getElementById("questionNumField");
     scoreField = document.getElementById("ScoreCounter");
-
+    A_button = document.getElementById("btn1");
+    B_button = document.getElementById("btn2");
+    C_Button = document.getElementById("btn3");
+    D_Button = document.getElementById("btn4");
 
 
     // Upon webpage startup
@@ -148,6 +170,29 @@ document.addEventListener("DOMContentLoaded", function() {
  
     
     // Event listeners
+    
+    // Event listener for answer A button
+    A_button.addEventListener("click", function() {
+        // check if the A button currently holds the correct answer
+        checkAnswer(A_button.innerHTML, `A) ${convertedAnswerText(question_bank[quiz.questionCounter - 1].answer)}`);
+    });
+    // Event listener for answer B button
+    B_button.addEventListener("click", function() {
+        // check if the B button currently holds the correct answer
+        checkAnswer(B_button.innerHTML, `B) ${convertedAnswerText(question_bank[quiz.questionCounter - 1].answer)}`);
+    });
+    // Event listener for answer C button
+    C_Button.addEventListener("click", function() {
+        // check if the C button currently holds the correct answer
+        checkAnswer(C_Button.innerHTML, `C) ${convertedAnswerText(question_bank[quiz.questionCounter - 1].answer)}`);
+    });
+    // Event listener for answer D button
+    D_Button.addEventListener("click", function() {
+        // check if the D button currently holds the correct answer
+        checkAnswer(D_Button.innerHTML, `D) ${convertedAnswerText(question_bank[quiz.questionCounter - 1].answer)}`);
+    });
+    
+    // Next button even listener
     nextQuestionButton.addEventListener("click", function() {
         // get next question
         quiz.nextQuestion();
