@@ -28,21 +28,34 @@
             </div>
 
             <div class="general-container difficulty-container">
-                <p>Select a Difficulty for the Quiz</p>
-
+<!--                <p>Enter your Username</p>-->
+                <h3>Username</h3>
+                <label for="input-username" id="enter-username-label"> Enter your Username</label>
+                <input
+                        type="text"
+                        id="input-username"
+                        name="username"
+                        class="input-username-field"
+                        minlength="5"
+                        maxlength="20"
+                        size="25"
+                        required
+                >
+                <button type="submit" value="submit-username" class="user-btn" id="submit-username">Submit</button>
+                <p id="username" class="display-username"></p>
                 <!-- name is the group for the buttons, value is what is returned on selection  -->
 
                 <!-- Easy selection -->
-                <input type="radio" id="easy-radio" name="difficulty" value="easy">
-                <label for="easy-radio">Easy</label>
+<!--                <input type="radio" id="easy-radio" name="difficulty" value="easy">-->
+<!--                <label for="easy-radio">Easy</label>-->
 
-                <!-- Medium selection -->
-                <input type="radio" id="medium-radio" name="difficulty" value="medium">
-                <label for="medium-radio">Medium</label>
+<!--                &lt;!&ndash; Medium selection &ndash;&gt;-->
+<!--                <input type="radio" id="medium-radio" name="difficulty" value="medium">-->
+<!--                <label for="medium-radio">Medium</label>-->
 
-                <!-- Hard selection -->
-                <input type="radio" id="hard-radio" name="difficulty" value="hard">
-                <label for="hard-radio">Hard</label>
+<!--                &lt;!&ndash; Hard selection &ndash;&gt;-->
+<!--                <input type="radio" id="hard-radio" name="difficulty" value="hard">-->
+<!--                <label for="hard-radio">Hard</label>-->
 
             </div>
 
