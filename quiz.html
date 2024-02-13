@@ -10,30 +10,65 @@
         <title>JavaScript Quiz</title>
         <link rel="stylesheet" href="quiz.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     </head>
     <body>
-        <header>
+        <header class="header-container">
             <h1> The 10 Question JavaScript Quiz </h1>
         </header>
 
         <div class="outer-container">
-            <div class="quiz-container">
+            <div class="general-container score-container">
+                <h2> Current Score </h2>
+                <h2>5</h2>
+            </div>
+
+            <div class="general-container difficulty-container">
+                <p>Select a Difficulty for the Quiz</p>
+
+                <!-- name is the group for the buttons, value is what is returned on selection  -->
+
+                <!-- Easy selection -->
+                <input type="radio" id="easy-radio" name="difficulty" value="easy">
+                <label for="easy-radio">Easy</label>
+
+                <!-- Medium selection -->
+                <input type="radio" id="medium-radio" name="difficulty" value="medium">
+                <label for="medium-radio">Medium</label>
+
+                <!-- Hard selection -->
+                <input type="radio" id="hard-radio" name="difficulty" value="hard">
+                <label for="hard-radio">Hard</label>
+
+            </div>
+
+            <div class="general-container quiz-container">
 
                 <div class="question-container">
                     <h2 class="question-num" id="questionNumField"></h2>
-                    <h2 class="question-text" id="question"></h2>
+                    <h2 class="question-text" id="question">this is a random question for testing this is even longer now </h2>
                 </div>
-                <div class="score" id="ScoreCounter"></div>
+
                 <div class="answers-button">
                     <button class="a-btns" id="btn1">A</button>
                     <button class="a-btns" id="btn2">B</button>
                     <button class="a-btns" id="btn3">C</button>
                     <button class="a-btns" id="btn4">D</button>
                 </div>
+                <button type="button" class="s-btn" id="next-question">Next Question</button>
+            </div>
 
-<!--                <div class="button-container">-->
-                    <button type="button" class="s-btn" id="next-question">Next Question</button>
-<!--                </div>-->
+            <div class="general-container score-history-container">
+                <h2>Score History</h2>
+
+                <div class="user-scores-container">
+                    <h3>Username</h3>
+                    <h3>Score</h3>
+                </div>
             </div>
         </div>
         <script src="quiz_javascript.js"></script>

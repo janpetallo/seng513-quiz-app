@@ -8,25 +8,24 @@ class Quiz {
 
 
     };
-
+    
     nextQuestion(){
-        // stop game after 10'th question
-        if(quiz.questionCounter >= 10){
-            document.getElementById("question").innerHTML = "Quiz Finished!"
-        }else{
-            this.questionCounter++;
-            updateQuestionField();
-        }
+        this.questionCounter++;  
+        
     };
 
     getScore() {
-        return "Score: " + this.score.toString() + " / 10";
+        return this.score;
     };
-
+    
     getQuestionNumber(){
         return "Question Number: " + this.questionCounter.toString() + " / 10";
     };
 
+
+    setDifficulty(difficulty){
+        this.difficulty = difficulty;
+    }
 }
 
 class Question{
@@ -144,6 +143,7 @@ document.addEventListener("DOMContentLoaded", function() {
     nextQuestionButton.addEventListener("click", function() {
         // get next question
         quiz.nextQuestion();
+        
         // update question number
         questionNumberField.textContent = quiz.getQuestionNumber();
         // update the score
@@ -152,4 +152,13 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+// Getting difficulty
+// Retrieve the radio buttons group difficulty
+let radioButtons = document.getElementsByName('difficulty');
 
+// Add event listener to each radio button
+radioButtons.forEach(function(radioButton) {
+    radioButton.addEventListener('change', function() {
+        quiz.setDifficulty(radioButton.value);
+    });
+});
