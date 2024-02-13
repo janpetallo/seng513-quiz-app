@@ -2,6 +2,11 @@ class Quiz {
     constructor(){
         this.score = 0;
         this.questionCounter = 1;
+        this.prev_question_difficulty = "easy"; // easy initially after fetching,
+                                            // then will be updated on checkAnswer function using the logic
+        this.easy_index = 0;
+        this.medium_index = 0;
+        this.hard_index = 0;
     };
 
     quizStart() {
@@ -16,7 +21,7 @@ class Quiz {
             document.getElementById("question").innerHTML = "Quiz Finished!"
         }else{
             this.questionCounter++;
-            updateQuestionField();
+            updateQuestionField(this.prev_question_difficulty);
         }
     };
 
@@ -41,10 +46,12 @@ class Quiz {
 }
 
 class Question{
-    constructor(text, choices, answer) {
+    constructor(text, choices, answer, difficulty, category) {
         this.text = text;
         this.choices = choices;
         this.answer = answer;
+        this.difficulty = difficulty;
+        this.category = category;
     }
 
     getQuestion(){
@@ -64,7 +71,9 @@ class User {
 
 }
 
-let question_bank = [];
+let question_bank_easy = [];
+let question_bank_medium = [];
+let question_bank_hard = [];
 
 async function fetchData(){
 
@@ -72,40 +81,63 @@ async function fetchData(){
 
         // fetch will return a response object and we need to await the promise from fetch
         // here we grab all our questions
-        const response = await fetch("https://opentdb.com/api.php?amount=25&category=15&type=multiple");
+        // we take our response and put it into data (we convert it to json)
+        // we wait because response returns a promise
+        const response_any = await fetch("https://opentdb.com/api.php?amount=50&type=multiple");
 
         // once the promise from fetch resolves we need to see if it is okay
         // if we cant locate resource
-        if(!response.ok){
+        if(!response_any.ok){
             throw new Error("Could not fetch resource");
         }
 
-        // we take our response and put it into data (we convert it to json)
-        // we wait because response returns a promise
-        const data = await response.json();
+        const data_any = await response_any.json();
 
-        for (let i = 0; i<data.results.length; i++) {
-            const questionData = data.results[i];
-            const question = new Question(questionData.question, questionData.incorrect_answers, questionData.correct_answer);
-            question_bank.push(question);
+        for (let i = 0; i<data_any.results.length; i++) {
+            let questionData = data_any.results[i];
+            let question = new Question(questionData.question, questionData.incorrect_answers, 
+                                        questionData.correct_answer, questionData.difficulty,
+                                        questionData.category);
+            if(questionData.difficulty === "easy"){
+                question_bank_easy.push(question);
+            }else if(questionData.difficulty === "medium"){ 
+                question_bank_medium.push(question);
+            } else {
+                question_bank_hard.push(question);
+            }
         }
 
-        updateQuestionField();
+        // update the question field to display the first EASY question
+        updateQuestionField(quiz.prev_question_difficulty);
     } catch (error) {
         console.error(error);
     }
 } fetchData();
 
+let correctAnswer = ""; // to store the correct answer
 
-function updateQuestionField() {
+function updateQuestionField(difficulty) {
+
+    let question;
+
     // get the current question from the question bank
-    let question = question_bank[quiz.questionCounter - 1];
+    if(difficulty === "easy"){
+        question = question_bank_easy[quiz.easy_index];
+        quiz.easy_index++;
+    } else if(difficulty === "medium"){
+        question = question_bank_medium[quiz.medium_index];
+        quiz.medium_index++;
+    } else {
+        question = question_bank_hard[quiz.hard_index];
+        quiz.hard_index++;
+    }
     
     // display the question based on the question number
-    document.getElementById("question").innerHTML = question.text;
+    document.getElementById("question").innerHTML = `<span class = "category"> ${question.category} </span> <br> ${question.text} 
+                                                        <br> <span class = "difficulty"> ${question.difficulty} </span>`;
     
     // correct answer
-    let correctAnswer = question.answer;
+    correctAnswer = question.answer;
     // incorrect answers
     let choices = question.choices;
     // randomly shuffle the choices (correct answer is included in the choices array)
@@ -123,6 +155,20 @@ function checkAnswer(selectedAnswer, correctAnswer) {
     if (selectedAnswer === correctAnswer) {
         // Increase score if the selected answer is correct
         quiz.increaseScore();
+        // increase the difficulty of the next question
+        if (quiz.prev_question_difficulty === "easy") {
+            quiz.prev_question_difficulty = "medium";
+        } else if (quiz.prev_question_difficulty === "medium") {
+            quiz.prev_question_difficulty = "hard";
+        } // if "hard", then it will remain "hard" for the next question
+    } // if incorrect
+    else {
+        // decrease the difficulty of the next question
+        if (quiz.prev_question_difficulty === "hard") {
+            quiz.prev_question_difficulty = "medium";
+        } else if (quiz.prev_question_difficulty === "medium") {
+            quiz.prev_question_difficulty = "easy";
+        } // if "easy", then it will remain "easy" for the next question
     }
 }
 
@@ -135,9 +181,6 @@ function convertedAnswerText(answerHTML) {
     // Return the text content of the temporary element, there is an or here incase some browsers can't get text content
     return tempElement.textContent || tempElement.innerText;
 }
-
-
-
 
 // Initialize user
 let user = new User;
@@ -174,22 +217,22 @@ document.addEventListener("DOMContentLoaded", function() {
     // Event listener for answer A button
     A_button.addEventListener("click", function() {
         // check if the A button currently holds the correct answer
-        checkAnswer(A_button.innerHTML, `A) ${convertedAnswerText(question_bank[quiz.questionCounter - 1].answer)}`);
+        checkAnswer(A_button.innerHTML, `A) ${convertedAnswerText(correctAnswer)}`);
     });
     // Event listener for answer B button
     B_button.addEventListener("click", function() {
         // check if the B button currently holds the correct answer
-        checkAnswer(B_button.innerHTML, `B) ${convertedAnswerText(question_bank[quiz.questionCounter - 1].answer)}`);
+        checkAnswer(B_button.innerHTML, `B) ${convertedAnswerText(correctAnswer)}`);
     });
     // Event listener for answer C button
     C_Button.addEventListener("click", function() {
         // check if the C button currently holds the correct answer
-        checkAnswer(C_Button.innerHTML, `C) ${convertedAnswerText(question_bank[quiz.questionCounter - 1].answer)}`);
+        checkAnswer(C_Button.innerHTML, `C) ${convertedAnswerText(correctAnswer)}`);
     });
     // Event listener for answer D button
     D_Button.addEventListener("click", function() {
         // check if the D button currently holds the correct answer
-        checkAnswer(D_Button.innerHTML, `D) ${convertedAnswerText(question_bank[quiz.questionCounter - 1].answer)}`);
+        checkAnswer(D_Button.innerHTML, `D) ${convertedAnswerText(correctAnswer)}`);
     });
     
     // Next button even listener
