@@ -129,24 +129,35 @@ button {
 }
 
 .difficulty-container {
+    /*display: flex;*/
     padding: 1rem;
     text-align: center;
     box-sizing: border-box; /* to include the padding in dimensions */
+}
+.test-div{
+    display: flex;
+    text-align: center;
+    justify-content: center;
 }
 .display-username{
     visibility: hidden;
 }
 
 #submit-username{
-    visibility: visible;
+    /*visibility: visible;*/
+    display: block;
+
 }
 
 #enter-username-label{
-    visibility: visible;
+    /*visibility: visible;*/
+    display: block;
+
 }
 
 #input-username{
-    visibility: visible;
+    /*visibility: visible;*/
+    display: block;
 }
 
 .input-username-field{
