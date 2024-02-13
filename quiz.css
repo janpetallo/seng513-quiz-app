@@ -85,6 +85,31 @@ button {
     border-bottom: 3px solid var(--accent-clr);
 }
 
+#question .difficulty{
+    font-size: 0.9rem;
+    font-weight: 500;
+    background-color: var(--accent-clr);
+    color: var(--light-f-clr);
+    padding: .2rem .4rem;
+    border-radius: .2rem;
+    margin-top: 0.5rem;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+#question .category{
+    font-size: 0.9rem;
+    font-weight: 500;
+    background-color: var(--primary-bg-clr);
+    color: var(--light-f-clr);
+    padding: .2rem .4rem;
+    border-radius: .2rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+
 /*.question-text {*/
 /*    word-break: break-word;*/
 /*}*/
