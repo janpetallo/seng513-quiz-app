@@ -100,10 +100,10 @@ function updateQuestionField() {
     choices.splice(Math.floor(Math.random() * (choices.length + 1)), 0, correctAnswer);
 
     // display options
-    let option1 = document.getElementById("btn1").textContent = choices[0];
-    let option2 = document.getElementById("btn2").textContent = choices[1];
-    let option3 = document.getElementById("btn3").textContent = choices[2];
-    let option4 = document.getElementById("btn4").textContent = choices[3];
+    let option1 = document.getElementById("btn1").textContent = `A) ${choices[0]}`;
+    let option2 = document.getElementById("btn2").textContent = `B) ${choices[1]}`;
+    let option3 = document.getElementById("btn3").textContent = `C) ${choices[2]}`;
+    let option4 = document.getElementById("btn4").textContent = `D) ${choices[3]}`;
 }
 
 
