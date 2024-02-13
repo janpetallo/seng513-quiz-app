@@ -31,8 +31,17 @@
 <!--                <p>Enter your Username</p>-->
                 <h3>Username</h3>
                 <label for="input-username" id="enter-username-label"> Enter your Username</label>
-                <input type="text" id="input-username" name="username" class="input-username-field">
-                <button type="submit" value="submit-username" id="submit-username">Submit</button>
+                <input
+                        type="text"
+                        id="input-username"
+                        name="username"
+                        class="input-username-field"
+                        minlength="5"
+                        maxlength="20"
+                        size="25"
+                        required
+                >
+                <button type="submit" value="submit-username" class="user-btn" id="submit-username">Submit</button>
                 <p id="username" class="display-username"></p>
                 <!-- name is the group for the buttons, value is what is returned on selection  -->
 

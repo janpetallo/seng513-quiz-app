@@ -101,7 +101,7 @@ button {
     padding: 1.5rem; /* top/bot and left and right */
 }
 
-.a-btns:hover {
+.a-btns:hover, .s-btn:hover {
     color: var(--light-f-clr);
     background-color: var(--accent-clr);
 }
@@ -113,10 +113,10 @@ button {
     margin-bottom: 1rem;
 }
 
-.s-btn:hover {
-    color: var(--light-f-clr);
-    background-color: var(--accent-clr);
-}
+/*.s-btn:hover {*/
+/*    color: var(--light-f-clr);*/
+/*    background-color: var(--accent-clr);*/
+/*}*/
 
 .score-history-container h2 {
     text-align: center;
@@ -136,17 +136,32 @@ button {
 .display-username{
     visibility: hidden;
 }
+
 #submit-username{
     visibility: visible;
 }
+
 #enter-username-label{
     visibility: visible;
 }
+
 #input-username{
     visibility: visible;
 }
+
 .input-username-field{
+    border-radius: 8px;
+    font-size: clamp(1rem, 1rem + 0.15vw, 1.3rem);
     width: 25%;
-    height: 7%;
+    padding: 0.5rem 1rem;
 }
 
+.user-btn {
+    min-width: 10%;
+    padding: 0.5rem;
+}
+
+.user-btn:hover {
+    color: var(--light-f-clr);
+    background-color: var(--accent-clr);
+}
