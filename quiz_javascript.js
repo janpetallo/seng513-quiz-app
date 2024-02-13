@@ -110,10 +110,10 @@ function updateQuestionField() {
     choices.splice(Math.floor(Math.random() * (choices.length + 1)), 0, correctAnswer);
 
     // display options
-    let option1 = document.getElementById("btn1").textContent = `A) ${choices[0]}`;
-    let option2 = document.getElementById("btn2").textContent = `B) ${choices[1]}`;
-    let option3 = document.getElementById("btn3").textContent = `C) ${choices[2]}`;
-    let option4 = document.getElementById("btn4").textContent = `D) ${choices[3]}`;
+    let option1 = document.getElementById("btn1").innerHTML = `A) ${choices[0]}`;
+    let option2 = document.getElementById("btn2").innerHTML = `B) ${choices[1]}`;
+    let option3 = document.getElementById("btn3").innerHTML = `C) ${choices[2]}`;
+    let option4 = document.getElementById("btn4").innerHTML = `D) ${choices[3]}`;
 }
 
 
@@ -146,9 +146,7 @@ document.addEventListener("DOMContentLoaded", function() {
     scoreField.textContent = quiz.getScore();
    
  
-
-
-
+    
     // Event listeners
     nextQuestionButton.addEventListener("click", function() {
         // get next question
