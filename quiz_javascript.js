@@ -81,8 +81,6 @@ async function fetchData(){
 
         // fetch will return a response object and we need to await the promise from fetch
         // here we grab all our questions
-        // we take our response and put it into data (we convert it to json)
-        // we wait because response returns a promise
         const response_any = await fetch("https://opentdb.com/api.php?amount=50&type=multiple");
 
         // once the promise from fetch resolves we need to see if it is okay
@@ -91,6 +89,8 @@ async function fetchData(){
             throw new Error("Could not fetch resource");
         }
 
+        // we take our response and put it into data (we convert it to json)
+        // we wait because response returns a promise
         const data_any = await response_any.json();
 
         for (let i = 0; i<data_any.results.length; i++) {
