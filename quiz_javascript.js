@@ -9,6 +9,7 @@ class Quiz {
         this.hard_index = 0;
         
         this.answered = 0;
+
     };
 
     quizStart() {
@@ -21,8 +22,18 @@ class Quiz {
         // stop game after 10'th question
         if(quiz.questionCounter >= 10){
             document.getElementById("question").innerHTML = "Quiz Finished!"
+            result.textContent = "Your score is: " + this.getScore();
+            playAgainButton.style.display = "block";
+            nextQuestionButton.style.display = "none";
+            A_Button.style.display = "none";
+            B_Button.style.display = "none";
+            C_Button.style.display = "none";
+            D_Button.style.display = "none";
         }else{
             this.questionCounter++;
+            if(this.questionCounter === 10){
+                nextQuestionButton.textContent = "Finish";
+            }
             updateQuestionField(this.prev_question_difficulty);
         }
     };
@@ -73,6 +84,7 @@ class Quiz {
     getAnsweredStatus(){
         return this.answered;
     }
+
 }
 
 class Question{
@@ -87,18 +99,6 @@ class Question{
     getQuestion(){
         return this.text;
     }
-}
-
-class User {
-    constructor (username) {
-        this.username = username;
-        this.scoreHistory = [];
-    }
-
-    // function to add score
-
-    // function to display
-
 }
 
 let question_bank_easy = [];
@@ -222,14 +222,12 @@ function convertedAnswerText(answerHTML) {
     return tempElement.textContent || tempElement.innerText;
 }
 
-// Initialize user
-let user = new User;
 // Initialize a quiz
 let quiz = new Quiz;
 
 
 // Declaring the html document variables
-let submitUsernameButton, nextQuestionButton, questionNumberField, scoreField, A_Button, B_Button, C_Button, D_Button;
+let result, playAgainButton, submitUsernameButton, nextQuestionButton, questionNumberField, scoreField, A_Button, B_Button, C_Button, D_Button;
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -242,6 +240,8 @@ document.addEventListener("DOMContentLoaded", function() {
     B_Button = document.getElementById("btn2");
     C_Button = document.getElementById("btn3");
     D_Button = document.getElementById("btn4");
+    playAgainButton = document.getElementById("play-again");
+    result = document.getElementById("result");
 
 
     // Upon webpage startup
@@ -345,7 +345,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (resultA === 1) {
                     A_Button.classList.add('correct-answer');
                 } else if (resultB === 1) {
-                    C_Button.classList.add('correct-answer');
+                    B_Button.classList.add('correct-answer');
                 } else if (resultD === 1) {
                     D_Button.classList.add('correct-answer');
                 }
@@ -378,7 +378,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 } else if (resultC === 1) {
                     C_Button.classList.add('correct-answer');
                 } else if (resultB === 1) {
-                    D_Button.classList.add('correct-answer');
+                    B_Button.classList.add('correct-answer');
                 }
             }
         }
@@ -386,30 +386,91 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Next button even listener
     nextQuestionButton.addEventListener("click", function() {
-        // reset answered status so button can be used again
-        quiz.resetAnswered();
-        // reset buttons back to default colors
-        A_Button.classList.remove('correct-answer', 'incorrect-answer');
-        B_Button.classList.remove('correct-answer', 'incorrect-answer');
-        C_Button.classList.remove('correct-answer', 'incorrect-answer');
-        D_Button.classList.remove('correct-answer', 'incorrect-answer');
-        // get next question
-        quiz.nextQuestion();
-        // update question number
-        questionNumberField.textContent = quiz.getQuestionNumber();
-        // update the score
+        // user must enter an answer before next question can be loaded.
+        if(quiz.getAnsweredStatus() === 1) {
+            // reset answered status so button can be used again
+            quiz.resetAnswered();
+            // reset buttons back to default colors
+            A_Button.classList.remove('correct-answer', 'incorrect-answer');
+            B_Button.classList.remove('correct-answer', 'incorrect-answer');
+            C_Button.classList.remove('correct-answer', 'incorrect-answer');
+            D_Button.classList.remove('correct-answer', 'incorrect-answer');
+            // get next question
+            quiz.nextQuestion();
+            // update question number
+            questionNumberField.textContent = quiz.getQuestionNumber();
+            // update the score
+            scoreField.textContent = quiz.getScore();
+        }
+    });
+
+
+    // Play again button event listener
+    playAgainButton.addEventListener("click", function() {
+        // on play again add score to history
+        addScore('DummyName', quiz.score);
+
+        // reset the quiz
+        quiz = new Quiz;
+
+        // reset the question banks
+        question_bank_easy = [];
+        question_bank_medium = [];
+        question_bank_hard = [];
+
+        // fetch new questions
+        fetchData();
+
+        // reset the score
         scoreField.textContent = quiz.getScore();
+
+        // reset the question number
+        questionNumberField.textContent = quiz.getQuestionNumber();
+
+        result.textContent = "";
+        playAgainButton.style.display = "none";
+        nextQuestionButton.style.display = "block";
+        A_Button.style.display = "block";
+        B_Button.style.display = "block";
+        C_Button.style.display = "block";
+        D_Button.style.display = "block";
+        nextQuestionButton.textContent = "Next Question";
     });
+    
 });
 
+/**
+ * Function that adds new score from high to low
+ * @param username the users name
+ * @param score the score the user got
+ */
+function addScore(username, score) {
+    const scoreTable = document.getElementById('score-table-id');
+    const tbody = scoreTable.querySelector('tbody');
+    const newRow = tbody.insertRow();
 
-// Getting difficulty
-// Retrieve the radio buttons group difficulty
-let radioButtons = document.getElementsByName('difficulty');
+    // add cells to row
+    const usernameCell = newRow.insertCell(0);
+    const scoreCell = newRow.insertCell(1);
 
-// Add event listener to each radio button
-radioButtons.forEach(function(radioButton) {
-    radioButton.addEventListener('change', function() {
-        quiz.setDifficulty(radioButton.value);
+    // add username and score to cells
+    usernameCell.textContent = username;
+    scoreCell.textContent = score;
+
+    // grab all the rows and make it an array
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    // sort in place (a is above b)
+    // we take in 2 rows a and b. Take the string value of the rows and subtract them.
+    // b - a negative (a is bigger than b so sort b before a)
+    // b - a positive put b in front of a
+    // 0 no change
+    // https://www.w3schools.com/js/js_array_sort.asp
+    rows.sort((a, b) => {
+        return parseInt(b.cells[1].textContent) - parseInt(a.cells[1].textContent);
     });
-});
+
+    // Re-append rows to the table body
+    tbody.innerHTML = '';
+    rows.forEach(row => tbody.appendChild(row));
+}

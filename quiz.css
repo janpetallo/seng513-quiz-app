@@ -3,6 +3,7 @@
     --dark-f-clr: black;
     --primary-bg-clr: #474F7A;
     --secondary-bg-clr: #000d34;
+    --tertiary-bg-clr: #0432bb;
     --accent-clr: #FC6736;
     --header-clr: #ffffff;
     --red-button: red;
@@ -140,19 +141,34 @@ button {
     margin-bottom: 1rem;
 }
 
+/*hide play-again initially*/
+#play-again{
+    display: none;
+}
+
 /*.s-btn:hover {*/
 /*    color: var(--light-f-clr);*/
 /*    background-color: var(--accent-clr);*/
 /*}*/
 
-.score-history-container h2 {
-    text-align: center;
+
+.score-history-table {
+    width: 100%;
+    border-collapse: collapse;
+
 }
 
-.user-scores-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+.score-history-table caption, th, td {
+    padding: 0.5rem 1rem;
+    text-align: center;
+
+}
+
+.score-history-table caption {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: var(--accent-clr);
 }
 
 .difficulty-container {

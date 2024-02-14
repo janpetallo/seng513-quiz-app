@@ -22,7 +22,7 @@
         </header>
 
         <div class="outer-container">
-            <div class="general-container score-container">
+            <div class="general-container score-container" id="-current-score">
                 <h2> Current Score: </h2>
                 <h2 id="ScoreCounter"></h2>
             </div>
@@ -74,16 +74,26 @@
                     <button class="a-btns" id="btn3"></button>
                     <button class="a-btns" id="btn4"></button>
                 </div>
+                <div id="result"></div>
                 <button type="button" class="s-btn" id="next-question">Next Question</button>
+                <button type="button" class="s-btn" id="play-again">Play Again!</button>
             </div>
 
-            <div class="general-container score-history-container">
-                <h2>Score History</h2>
+            <div class="general-container">
 
-                <div class="user-scores-container">
-                    <h3>Username</h3>
-                    <h3>Score</h3>
-                </div>
+                <table class="score-history-table" id="score-table-id">
+                    <caption>Score History</caption>
+                    <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Score</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Add when game ends -->
+                    </tbody>
+                </table>
+
             </div>
         </div>
         <script src="quiz_javascript.js"></script>
