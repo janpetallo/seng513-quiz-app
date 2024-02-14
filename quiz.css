@@ -140,6 +140,12 @@ button {
     margin-bottom: 1rem;
 }
 
+/*hide play-again initially*/
+#play-again{
+    display: none;
+}
+
+
 /*.s-btn:hover {*/
 /*    color: var(--light-f-clr);*/
 /*    background-color: var(--accent-clr);*/
