@@ -161,19 +161,24 @@ button {
     box-sizing: border-box; /* to include the padding in dimensions */
 }
 .display-username{
-    visibility: hidden;
+    display: block;
 }
 
 #submit-username{
-    visibility: visible;
+    display: block;
 }
 
 #enter-username-label{
-    visibility: visible;
+    display: block;
 }
 
 #input-username{
-    visibility: visible;
+    display: block;
+}
+.username-container{
+    display: inline-flex;
+    justify-content: center;
+    text-align: center;
 }
 
 .input-username-field{
