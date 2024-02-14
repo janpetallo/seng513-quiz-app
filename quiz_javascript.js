@@ -101,55 +101,6 @@ class Question{
     }
 }
 
-class User {
-    constructor () {
-        //  Tracks users start with some dummy data
-        this.users = {
-            'user1' : [10, 5],
-            'user2' : [7, 3]
-        };
-    }
-
-
-    /**
-     * Function to update the users in this.user object
-     * @param username Username to check if in object database
-     * @param score new score to add
-     */
-    userUpdate(username, score) {
-        if (this.users.hasOwnProperty(username)) { // check if the username is already in the object
-            this.users[username].push(score); // add new score to preexisting user
-        } else {
-            this.users[username] = [score]; // add brand new user
-        }
-    }
-
-    /**
-     * Returns users object
-     * @returns {*|{user1: number[], user2: number[]}}
-     */
-    getUsers() {
-        return this.users;
-    }
-
-    /**
-     * Function that iterates through each user in this.user iterates through their scores and puts it in a table
-     */
-    scoreHistory() {
-        let scoreHistory = document.getElementById('score-table-id'); // get the score history table
-        for (let user in this.users) { // go through all the users
-            const scores = this.users[user]; // grab a users score
-            scores.forEach(score => { // go through all the scores
-                const row = scoreHistory.insertRow(-1); // add new row at bottom
-                const cell1 = row.insertCell(0);
-                const cell2 = row.insertCell(1);
-                cell1.textContent = user;
-                cell2.textContent = score;
-            });
-        }
-    }
-}
-
 let question_bank_easy = [];
 let question_bank_medium = [];
 let question_bank_hard = [];
@@ -271,8 +222,6 @@ function convertedAnswerText(answerHTML) {
     return tempElement.textContent || tempElement.innerText;
 }
 
-// Initialize user
-let user = new User;
 // Initialize a quiz
 let quiz = new Quiz;
 
@@ -458,6 +407,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Play again button event listener
     playAgainButton.addEventListener("click", function() {
+        // on play again add score to history
+        addScore('DummyName', quiz.score);
+
         // reset the quiz
         quiz = new Quiz;
 
@@ -487,22 +439,38 @@ document.addEventListener("DOMContentLoaded", function() {
     
 });
 
+/**
+ * Function that adds new score from high to low
+ * @param username the users name
+ * @param score the score the user got
+ */
+function addScore(username, score) {
+    const scoreTable = document.getElementById('score-table-id');
+    const tbody = scoreTable.querySelector('tbody');
+    const newRow = tbody.insertRow();
 
-// Getting difficulty
-// Retrieve the radio buttons group difficulty
-let radioButtons = document.getElementsByName('difficulty');
+    // add cells to row
+    const usernameCell = newRow.insertCell(0);
+    const scoreCell = newRow.insertCell(1);
 
-// Add event listener to each radio button
-radioButtons.forEach(function(radioButton) {
-    radioButton.addEventListener('change', function() {
-        user.setDifficulty(radioButton.value);
+    // add username and score to cells
+    usernameCell.textContent = username;
+    scoreCell.textContent = score;
+
+    // grab all the rows and make it an array
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    // sort in place (a is above b)
+    // we take in 2 rows a and b. Take the string value of the rows and subtract them.
+    // b - a negative (a is bigger than b so sort b before a)
+    // b - a positive put b in front of a
+    // 0 no change
+    // https://www.w3schools.com/js/js_array_sort.asp
+    rows.sort((a, b) => {
+        return parseInt(b.cells[1].textContent) - parseInt(a.cells[1].textContent);
     });
-});
 
-
-//  Delete later
-user.userUpdate('user3', 4);
-
-console.log(user.getUsers());
-
-user.scoreHistory();
+    // Re-append rows to the table body
+    tbody.innerHTML = '';
+    rows.forEach(row => tbody.appendChild(row));
+}
