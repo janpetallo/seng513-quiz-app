@@ -1,3 +1,4 @@
+let currentUsername;
 class Quiz {
     constructor(){
         this.score = 0;
@@ -67,8 +68,9 @@ class Quiz {
             inputUsernameField.style.display="none";
             usernameLabel.style.display="none";
             displayUsername.style.display="block";
+            currentUsername= inputUsernameField.value;
+            displayUsername.innerHTML=currentUsername;
 
-            displayUsername.innerHTML=inputUsernameField.value;
         }
     }
 
@@ -408,7 +410,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Play again button event listener
     playAgainButton.addEventListener("click", function() {
         // on play again add score to history
-        addScore('DummyName', quiz.score);
+        addScore(currentUsername, quiz.score);
 
         // reset the quiz
         quiz = new Quiz;
