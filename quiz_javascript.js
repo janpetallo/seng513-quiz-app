@@ -345,7 +345,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (resultA === 1) {
                     A_Button.classList.add('correct-answer');
                 } else if (resultB === 1) {
-                    C_Button.classList.add('correct-answer');
+                    B_Button.classList.add('correct-answer');
                 } else if (resultD === 1) {
                     D_Button.classList.add('correct-answer');
                 }
@@ -378,7 +378,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 } else if (resultC === 1) {
                     C_Button.classList.add('correct-answer');
                 } else if (resultB === 1) {
-                    D_Button.classList.add('correct-answer');
+                    B_Button.classList.add('correct-answer');
                 }
             }
         }
