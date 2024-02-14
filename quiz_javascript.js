@@ -356,3 +356,4 @@ radioButtons.forEach(function(radioButton) {
         quiz.setDifficulty(radioButton.value);
     });
 });
+
