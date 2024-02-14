@@ -5,6 +5,8 @@
     --secondary-bg-clr: #000d34;
     --accent-clr: #FC6736;
     --header-clr: #ffffff;
+    --red-button: red;
+    --green-button: green;
     --ff: "Roboto", sans-serif;
 }
 
@@ -193,12 +195,18 @@ button {
 
 /*Class to allow button to change to green when the answer is correct*/
 .correct-answer {
-    background-color: green;
-    color: white;
+    background-color: var(--green-button);
+    color: var(--light-f-clr);
 }
 
 /*Class to allow button to change to red when the answer is incorrect*/
-.Incorrect-answer {
-    background-color: red;
-    color: white;
+.incorrect-answer {
+    background-color: var(--red-button);
+    color: var(--light-f-clr);
+}
+
+/*Class to change the button back to default colors*/
+.default-button{
+    color: var(--dark-f-clr);
+    background-color: var( --light-f-clr);
 }
