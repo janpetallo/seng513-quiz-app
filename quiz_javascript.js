@@ -224,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Event listeners
     
-    // Event listener for answer A button
+    // Event listener for Answer A button
     A_Button.addEventListener("click", function() {
         // check if the A button currently holds the correct answer
         let result = checkAnswer(A_Button.innerHTML, `A) ${convertedAnswerText(correctAnswer)}`);
