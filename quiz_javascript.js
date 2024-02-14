@@ -443,6 +443,7 @@ document.addEventListener("DOMContentLoaded", function() {
         B_Button.style.display = "block";
         C_Button.style.display = "block";
         D_Button.style.display = "block";
+        nextQuestionButton.textContent = "Next Question";
     });
     
 });
