@@ -10,11 +10,6 @@ class Quiz {
         
         this.answered = 0;
 
-        //  Tracks users start with some dummy data
-        this.users = {
-            'user1' : [10, 5],
-            'user2' : [7, 3]
-        };
     };
 
     quizStart() {
@@ -80,6 +75,31 @@ class Quiz {
         return this.answered;
     }
 
+}
+
+class Question{
+    constructor(text, choices, answer, difficulty, category) {
+        this.text = text;
+        this.choices = choices;
+        this.answer = answer;
+        this.difficulty = difficulty;
+        this.category = category;
+    }
+
+    getQuestion(){
+        return this.text;
+    }
+}
+
+class User {
+    constructor () {
+        //  Tracks users start with some dummy data
+        this.users = {
+            'user1' : [10, 5],
+            'user2' : [7, 3]
+        };
+    }
+
 
     /**
      * Function to update the users in this.user object
@@ -94,6 +114,10 @@ class Quiz {
         }
     }
 
+    /**
+     * Returns users object
+     * @returns {*|{user1: number[], user2: number[]}}
+     */
     getUsers() {
         return this.users;
     }
@@ -114,32 +138,6 @@ class Quiz {
             });
         }
     }
-}
-
-class Question{
-    constructor(text, choices, answer, difficulty, category) {
-        this.text = text;
-        this.choices = choices;
-        this.answer = answer;
-        this.difficulty = difficulty;
-        this.category = category;
-    }
-
-    getQuestion(){
-        return this.text;
-    }
-}
-
-class User {
-    constructor (username) {
-        this.username = username;
-        this.scoreHistory = [];
-    }
-
-    // function to add score
-
-    // function to display
-
 }
 
 let question_bank_easy = [];
@@ -454,14 +452,14 @@ let radioButtons = document.getElementsByName('difficulty');
 // Add event listener to each radio button
 radioButtons.forEach(function(radioButton) {
     radioButton.addEventListener('change', function() {
-        quiz.setDifficulty(radioButton.value);
+        user.setDifficulty(radioButton.value);
     });
 });
 
 
 //  Delete later
-quiz.userUpdate('user3', 4);
+user.userUpdate('user3', 4);
 
-console.log(quiz.getUsers());
+console.log(user.getUsers());
 
-quiz.scoreHistory();
+user.scoreHistory();
