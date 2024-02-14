@@ -21,8 +21,18 @@ class Quiz {
         // stop game after 10'th question
         if(quiz.questionCounter >= 10){
             document.getElementById("question").innerHTML = "Quiz Finished!"
+            result.textContent = "Your score is: " + this.getScore();
+            playAgainButton.style.display = "block";
+            nextQuestionButton.style.display = "none";
+            A_Button.style.display = "none";
+            B_Button.style.display = "none";
+            C_Button.style.display = "none";
+            D_Button.style.display = "none";
         }else{
             this.questionCounter++;
+            if(this.questionCounter === 10){
+                nextQuestionButton.textContent = "Finish";
+            }
             updateQuestionField(this.prev_question_difficulty);
         }
     };
@@ -229,7 +239,7 @@ let quiz = new Quiz;
 
 
 // Declaring the html document variables
-let submitUsernameButton, nextQuestionButton, questionNumberField, scoreField, A_Button, B_Button, C_Button, D_Button;
+let result, playAgainButton, submitUsernameButton, nextQuestionButton, questionNumberField, scoreField, A_Button, B_Button, C_Button, D_Button;
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -242,6 +252,8 @@ document.addEventListener("DOMContentLoaded", function() {
     B_Button = document.getElementById("btn2");
     C_Button = document.getElementById("btn3");
     D_Button = document.getElementById("btn4");
+    playAgainButton = document.getElementById("play-again");
+    result = document.getElementById("result");
 
 
     // Upon webpage startup
@@ -403,6 +415,36 @@ document.addEventListener("DOMContentLoaded", function() {
             scoreField.textContent = quiz.getScore();
         }
     });
+
+
+    // Play again button event listener
+    playAgainButton.addEventListener("click", function() {
+        // reset the quiz
+        quiz = new Quiz;
+
+        // reset the question banks
+        question_bank_easy = [];
+        question_bank_medium = [];
+        question_bank_hard = [];
+
+        // fetch new questions
+        fetchData();
+
+        // reset the score
+        scoreField.textContent = quiz.getScore();
+
+        // reset the question number
+        questionNumberField.textContent = quiz.getQuestionNumber();
+
+        result.textContent = "";
+        playAgainButton.style.display = "none";
+        nextQuestionButton.style.display = "block";
+        A_Button.style.display = "block";
+        B_Button.style.display = "block";
+        C_Button.style.display = "block";
+        D_Button.style.display = "block";
+    });
+    
 });
 
 
