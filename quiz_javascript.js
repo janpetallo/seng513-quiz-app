@@ -9,6 +9,12 @@ class Quiz {
         this.hard_index = 0;
         
         this.answered = 0;
+
+        //  Tracks users start with some dummy data
+        this.users = {
+            'user1' : [10, 5],
+            'user2' : [7, 3]
+        };
     };
 
     quizStart() {
@@ -82,6 +88,41 @@ class Quiz {
     
     getAnsweredStatus(){
         return this.answered;
+    }
+
+
+    /**
+     * Function to update the users in this.user object
+     * @param username Username to check if in object database
+     * @param score new score to add
+     */
+    userUpdate(username, score) {
+        if (this.users.hasOwnProperty(username)) { // check if the username is already in the object
+            this.users[username].push(score); // add new score to preexisting user
+        } else {
+            this.users[username] = [score]; // add brand new user
+        }
+    }
+
+    getUsers() {
+        return this.users;
+    }
+
+    /**
+     * Function that iterates through each user in this.user iterates through their scores and puts it in a table
+     */
+    scoreHistory() {
+        let scoreHistory = document.getElementById('score-table-id'); // get the score history table
+        for (let user in this.users) { // go through all the users
+            const scores = this.users[user]; // grab a users score
+            scores.forEach(score => { // go through all the scores
+                const row = scoreHistory.insertRow(-1); // add new row at bottom
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                cell1.textContent = user;
+                cell2.textContent = score;
+            });
+        }
     }
 }
 
@@ -459,3 +500,11 @@ radioButtons.forEach(function(radioButton) {
         quiz.setDifficulty(radioButton.value);
     });
 });
+
+
+//  Delete later
+quiz.userUpdate('user3', 4);
+
+console.log(quiz.getUsers());
+
+quiz.scoreHistory();
