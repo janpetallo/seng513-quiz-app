@@ -45,6 +45,22 @@ class Quiz {
     setDifficulty(difficulty){
         this.difficulty = difficulty;
     }
+    setUsername(){
+        let inputUsernameField=document.getElementById("input-username");
+        if(inputUsernameField.value.length>2) {
+            let usernameSubmitB = document.getElementById("submit-username");
+            let usernameLabel = document.getElementById("enter-username-label");
+            let displayUsername=document.getElementById("username");
+
+            usernameSubmitB.style.display="none";
+            inputUsernameField.style.display="none";
+            usernameLabel.style.display="none";
+            displayUsername.style.display="block";
+
+            displayUsername.innerHTML=inputUsernameField.value;
+        }
+    }
+
     
     setAnswered(){
         this.answered = 1;
@@ -213,11 +229,12 @@ let quiz = new Quiz;
 
 
 // Declaring the html document variables
-let nextQuestionButton, questionNumberField, scoreField, A_Button, B_Button, C_Button, D_Button;
+let submitUsernameButton, nextQuestionButton, questionNumberField, scoreField, A_Button, B_Button, C_Button, D_Button;
 
 
 document.addEventListener("DOMContentLoaded", function() {
     // Wait for the DOM content to be fully loaded before instantiating the document components
+    submitUsernameButton=document.getElementById("submit-username")
     nextQuestionButton = document.getElementById("next-question");
     questionNumberField = document.getElementById("questionNumField");
     scoreField = document.getElementById("ScoreCounter");
@@ -237,6 +254,9 @@ document.addEventListener("DOMContentLoaded", function() {
  
     
     // Event listeners
+    submitUsernameButton.addEventListener("click", function() {
+        quiz.setUsername();
+    });
     
     // Event listener for Answer A button
     A_Button.addEventListener("click", function() {
