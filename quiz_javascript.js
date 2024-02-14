@@ -162,8 +162,6 @@ function updateQuestionField(difficulty) {
 function checkAnswer(selectedAnswer, correctAnswer) {
     // Check if the selected answer is correct
     if (selectedAnswer === correctAnswer) {
-        // Increase score if the selected answer is correct
-        quiz.increaseScore();
         // increase the difficulty of the next question
         if (quiz.prev_question_difficulty === "easy") {
             quiz.prev_question_difficulty = "medium";
@@ -233,6 +231,8 @@ document.addEventListener("DOMContentLoaded", function() {
         // change button color to red if it is the wrong answer, green if right answer
         if (result === 1) {
             A_Button.classList.add('correct-answer');
+            // Increase score if the selected answer is correct
+            quiz.increaseScore();
         } else if (result === 0){
             A_Button.classList.add('incorrect-answer');
 
@@ -257,6 +257,8 @@ document.addEventListener("DOMContentLoaded", function() {
         // change button color to red if it is the wrong answer, green if right answer
         if (result === 1) {
             B_Button.classList.add('correct-answer');
+            // Increase score if the selected answer is correct
+            quiz.increaseScore();
         } else if (result === 0) {
             B_Button.classList.add('incorrect-answer');
             
@@ -281,6 +283,8 @@ document.addEventListener("DOMContentLoaded", function() {
         // change button color to red if it is the wrong answer, green if right answer
         if (result === 1) {
             C_Button.classList.add('correct-answer');
+            // Increase score if the selected answer is correct
+            quiz.increaseScore();
         } else if (result === 0){
             C_Button.classList.add('incorrect-answer');
 
@@ -305,6 +309,8 @@ document.addEventListener("DOMContentLoaded", function() {
         // change button color to red if it is the wrong answer, green if right answer
         if (result === 1) {
             D_Button.classList.add('correct-answer');
+            // Increase score if the selected answer is correct
+            quiz.increaseScore();
         } else if (result === 0) {
             D_Button.classList.add('incorrect-answer');
 
