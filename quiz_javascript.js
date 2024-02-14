@@ -386,19 +386,22 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Next button even listener
     nextQuestionButton.addEventListener("click", function() {
-        // reset answered status so button can be used again
-        quiz.resetAnswered();
-        // reset buttons back to default colors
-        A_Button.classList.remove('correct-answer', 'incorrect-answer');
-        B_Button.classList.remove('correct-answer', 'incorrect-answer');
-        C_Button.classList.remove('correct-answer', 'incorrect-answer');
-        D_Button.classList.remove('correct-answer', 'incorrect-answer');
-        // get next question
-        quiz.nextQuestion();
-        // update question number
-        questionNumberField.textContent = quiz.getQuestionNumber();
-        // update the score
-        scoreField.textContent = quiz.getScore();
+        // user must enter an answer before next question can be loaded.
+        if(quiz.getAnsweredStatus() === 1) {
+            // reset answered status so button can be used again
+            quiz.resetAnswered();
+            // reset buttons back to default colors
+            A_Button.classList.remove('correct-answer', 'incorrect-answer');
+            B_Button.classList.remove('correct-answer', 'incorrect-answer');
+            C_Button.classList.remove('correct-answer', 'incorrect-answer');
+            D_Button.classList.remove('correct-answer', 'incorrect-answer');
+            // get next question
+            quiz.nextQuestion();
+            // update question number
+            questionNumberField.textContent = quiz.getQuestionNumber();
+            // update the score
+            scoreField.textContent = quiz.getScore();
+        }
     });
 });
 
