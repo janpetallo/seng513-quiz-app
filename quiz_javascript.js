@@ -132,7 +132,7 @@ async function fetchData(){
         }
 
         // update the question field to display the first EASY question
-        updateQuestionField(quiz, quiz.prev_question_difficulty);
+        updateQuestionField.call(quiz, quiz.prev_question_difficulty);
     } catch (error) {
         console.error(error);
     }
