@@ -50,11 +50,8 @@ class Quiz {
 
   
     setUsername(){
-        let inputUsernameField=document.getElementById("input-username");
+
         if(inputUsernameField.value.length>2) {
-            let usernameSubmitB = document.getElementById("submit-username");
-            let usernameLabel = document.getElementById("enter-username-label");
-            let displayUsername=document.getElementById("username");
 
             usernameSubmitB.style.display="none";
             inputUsernameField.style.display="none";
@@ -220,9 +217,9 @@ function convertedAnswerText(answerHTML) {
 // Initialize a quiz
 let quiz = new Quiz;
 
-
 // Declaring the html document variables
-let result, playAgainButton, submitUsernameButton, nextQuestionButton, questionNumberField, scoreField, A_Button, B_Button, C_Button, D_Button;
+
+let inputUsernameField ,displayUsername ,usernameLabel ,usernameSubmitB, result, playAgainButton, submitUsernameButton, nextQuestionButton, questionNumberField, scoreField, A_Button, B_Button, C_Button, D_Button;
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -237,6 +234,10 @@ document.addEventListener("DOMContentLoaded", function() {
     D_Button = document.getElementById("btn4");
     playAgainButton = document.getElementById("play-again");
     result = document.getElementById("result");
+    usernameSubmitB = document.getElementById("submit-username");
+    usernameLabel = document.getElementById("enter-username-label");
+    displayUsername=document.getElementById("username");
+    inputUsernameField=document.getElementById("input-username");
 
 
     // Upon webpage startup
@@ -430,6 +431,12 @@ document.addEventListener("DOMContentLoaded", function() {
         C_Button.style.display = "block";
         D_Button.style.display = "block";
         nextQuestionButton.textContent = "Next Question";
+        usernameSubmitB.style.display="block";
+        inputUsernameField.style.display="block";
+        usernameLabel.style.display="block";
+        displayUsername.innerHTML="";
+        displayUsername.style.display="none";
+        inputUsernameField.value = "";
     });
     
 });
