@@ -90,9 +90,6 @@ class Question{
         this.category = category;
     }
 
-    getQuestion(){
-        return this.text;
-    }
 }
 
 let question_bank_easy = [];
