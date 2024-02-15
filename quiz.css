@@ -192,7 +192,8 @@ button {
     display: block;
 }
 .username-container{
-    display: inline-flex;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     text-align: center;
 }
