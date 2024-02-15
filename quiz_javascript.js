@@ -177,9 +177,12 @@ function updateQuestionField(difficulty) {
 }
 
 // Function to check if the user's selected answer is correct
-function checkAnswer(game, selectedAnswer, correctAnswer) {
+// answers[0] = selectedAnswer
+// answers[1] = correctAnswer
+
+function checkAnswer(game, answers) {
     // Check if the selected answer is correct
-    if (selectedAnswer === correctAnswer) {
+    if (answers[0] === answers[1]) {
         // increase the difficulty of the next question
         if (game.prev_question_difficulty === "easy") {
             game.prev_question_difficulty = "medium";
@@ -253,8 +256,12 @@ document.addEventListener("DOMContentLoaded", function() {
             // set answered status so button can't be used again
             quiz.setAnswered();
             
+            let answers_A =[];
+            answers_A.push(A_Button.innerHTML);
+            answers_A.push(`A) ${convertedAnswerText(correctAnswer)}`);
+            
             // check if the A button currently holds the correct answer
-            let result = checkAnswer(quiz, A_Button.innerHTML, `A) ${convertedAnswerText(correctAnswer)}`);
+            let result = checkAnswer.apply(quiz, answers_A);
             // change button color to red if it is the wrong answer, green if right answer
             if (result === 1) {
                 A_Button.classList.add('correct-answer');
@@ -262,11 +269,23 @@ document.addEventListener("DOMContentLoaded", function() {
                 quiz.increaseScore();
             } else if (result === 0) {
                 A_Button.classList.add('incorrect-answer');
-
+                
+                let answers_B = [];
+                answers_B.push(B_Button.innerHTML);
+                answers_B.push(`B) ${convertedAnswerText(correctAnswer)}`);
+                
+                let answers_C = [];
+                answers_C.push(C_Button.innerHTML);
+                answers_C.push(`C) ${convertedAnswerText(correctAnswer)}`);
+                
+                let answers_D = [];
+                answers_D.push(D_Button.innerHTML);
+                answers_D.push(`D) ${convertedAnswerText(correctAnswer)}`);
+                
                 // make the button containing the correct answer green
-                let resultB = checkAnswer(quiz, B_Button.innerHTML, `B) ${convertedAnswerText(correctAnswer)}`);
-                let resultC = checkAnswer(quiz, C_Button.innerHTML, `C) ${convertedAnswerText(correctAnswer)}`);
-                let resultD = checkAnswer(quiz, D_Button.innerHTML, `D) ${convertedAnswerText(correctAnswer)}`);
+                let resultB = checkAnswer.apply(quiz, answers_B);
+                let resultC = checkAnswer.apply(quiz, answers_C);
+                let resultD = checkAnswer.apply(quiz, answers_D);
 
                 if (resultB === 1) {
                     B_Button.classList.add('correct-answer');
@@ -284,8 +303,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if(quiz.getAnsweredStatus() === 0) {
             // set answered status so button can't be used again
             quiz.setAnswered();
+
+            let answers_B = [];
+            answers_B.push(B_Button.innerHTML);
+            answers_B.push(`B) ${convertedAnswerText(correctAnswer)}`);
+            
             // check if the B button currently holds the correct answer
-            let result = checkAnswer(quiz, B_Button.innerHTML, `B) ${convertedAnswerText(correctAnswer)}`);
+            let result = checkAnswer.apply(quiz, answers_B);
             // change button color to red if it is the wrong answer, green if right answer
             if (result === 1) {
                 B_Button.classList.add('correct-answer');
@@ -294,10 +318,22 @@ document.addEventListener("DOMContentLoaded", function() {
             } else if (result === 0) {
                 B_Button.classList.add('incorrect-answer');
 
+                let answers_A =[];
+                answers_A.push(A_Button.innerHTML);
+                answers_A.push(`A) ${convertedAnswerText(correctAnswer)}`);
+
+                let answers_C = [];
+                answers_C.push(C_Button.innerHTML);
+                answers_C.push(`C) ${convertedAnswerText(correctAnswer)}`);
+
+                let answers_D = [];
+                answers_D.push(D_Button.innerHTML);
+                answers_D.push(`D) ${convertedAnswerText(correctAnswer)}`);
+
                 // make the button containing the correct answer green
-                let resultA = checkAnswer(quiz, A_Button.innerHTML, `A) ${convertedAnswerText(correctAnswer)}`);
-                let resultC = checkAnswer(quiz, C_Button.innerHTML, `C) ${convertedAnswerText(correctAnswer)}`);
-                let resultD = checkAnswer(quiz, D_Button.innerHTML, `D) ${convertedAnswerText(correctAnswer)}`);
+                let resultA = checkAnswer.apply(quiz, answers_A);
+                let resultC = checkAnswer.apply(quiz, answers_C);
+                let resultD = checkAnswer.apply(quiz, answers_D);
 
                 if (resultA === 1) {
                     A_Button.classList.add('correct-answer');
@@ -315,8 +351,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if(quiz.getAnsweredStatus() === 0) {
             // set answered status so button can't be used again
             quiz.setAnswered();
+
+            let answers_C = [];
+            answers_C.push(C_Button.innerHTML);
+            answers_C.push(`C) ${convertedAnswerText(correctAnswer)}`);
+            
             // check if the C button currently holds the correct answer
-            let result = checkAnswer(quiz, C_Button.innerHTML, `C) ${convertedAnswerText(correctAnswer)}`);
+            let result = checkAnswer.apply(quiz, answers_C);
             // change button color to red if it is the wrong answer, green if right answer
             if (result === 1) {
                 C_Button.classList.add('correct-answer');
@@ -325,10 +366,22 @@ document.addEventListener("DOMContentLoaded", function() {
             } else if (result === 0) {
                 C_Button.classList.add('incorrect-answer');
 
+                let answers_A =[];
+                answers_A.push(A_Button.innerHTML);
+                answers_A.push(`A) ${convertedAnswerText(correctAnswer)}`);
+
+                let answers_B = [];
+                answers_B.push(B_Button.innerHTML);
+                answers_B.push(`B) ${convertedAnswerText(correctAnswer)}`);
+
+                let answers_D = [];
+                answers_D.push(D_Button.innerHTML);
+                answers_D.push(`D) ${convertedAnswerText(correctAnswer)}`);
+
                 // make the button containing the correct answer green
-                let resultA = checkAnswer(quiz, A_Button.innerHTML, `A) ${convertedAnswerText(correctAnswer)}`);
-                let resultB = checkAnswer(quiz, B_Button.innerHTML, `B) ${convertedAnswerText(correctAnswer)}`);
-                let resultD = checkAnswer(quiz, D_Button.innerHTML, `D) ${convertedAnswerText(correctAnswer)}`);
+                let resultA = checkAnswer.apply(quiz, answers_A);
+                let resultB = checkAnswer.apply(quiz, answers_B);
+                let resultD = checkAnswer.apply(quiz, answers_D);
 
                 if (resultA === 1) {
                     A_Button.classList.add('correct-answer');
@@ -346,8 +399,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if(quiz.getAnsweredStatus() === 0) {
             // set answered status so button can't be used again
             quiz.setAnswered();
+
+            let answers_D = [];
+            answers_D.push(D_Button.innerHTML);
+            answers_D.push(`D) ${convertedAnswerText(correctAnswer)}`);
+            
             // check if the D button currently holds the correct answer
-            let result = checkAnswer(quiz, D_Button.innerHTML, `D) ${convertedAnswerText(correctAnswer)}`);
+            let result = checkAnswer.apply(quiz, answers_D);
             // change button color to red if it is the wrong answer, green if right answer
             if (result === 1) {
                 D_Button.classList.add('correct-answer');
@@ -355,11 +413,23 @@ document.addEventListener("DOMContentLoaded", function() {
                 quiz.increaseScore();
             } else if (result === 0) {
                 D_Button.classList.add('incorrect-answer');
+                
+                let answers_A =[];
+                answers_A.push(A_Button.innerHTML);
+                answers_A.push(`A) ${convertedAnswerText(correctAnswer)}`);
 
+                let answers_C = [];
+                answers_C.push(C_Button.innerHTML);
+                answers_C.push(`C) ${convertedAnswerText(correctAnswer)}`);
+
+                let answers_B = [];
+                answers_B.push(B_Button.innerHTML);
+                answers_B.push(`B) ${convertedAnswerText(correctAnswer)}`);
+                
                 // make the button containing the correct answer green
-                let resultA = checkAnswer(quiz, A_Button.innerHTML, `A) ${convertedAnswerText(correctAnswer)}`);
-                let resultC = checkAnswer(quiz, C_Button.innerHTML, `C) ${convertedAnswerText(correctAnswer)}`);
-                let resultB = checkAnswer(quiz, B_Button.innerHTML, `B) ${convertedAnswerText(correctAnswer)}`);
+                let resultA = checkAnswer.apply(quiz, answers_A);
+                let resultC = checkAnswer.apply(quiz, answers_C);
+                let resultB = checkAnswer.apply(quiz, answers_B);
 
                 if (resultA === 1) {
                     A_Button.classList.add('correct-answer');
