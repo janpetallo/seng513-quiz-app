@@ -13,11 +13,6 @@ class Quiz {
 
     };
 
-    quizStart() {
-
-
-    };
-
 
     nextQuestion(){
         // stop game after 10'th question
@@ -52,11 +47,7 @@ class Quiz {
     getQuestionNumber(){
         return "Question Number: " + this.questionCounter.toString() + " / 10";
     };
-
-
-    setDifficulty(difficulty){
-        this.difficulty = difficulty;
-    }
+    
     setUsername(){
         let inputUsernameField=document.getElementById("input-username");
         if(inputUsernameField.value.length>2) {
@@ -73,7 +64,6 @@ class Quiz {
 
         }
     }
-
     
     setAnswered(){
         this.answered = 1;
@@ -96,10 +86,6 @@ class Question{
         this.answer = answer;
         this.difficulty = difficulty;
         this.category = category;
-    }
-
-    getQuestion(){
-        return this.text;
     }
 }
 
