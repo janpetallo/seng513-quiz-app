@@ -13,12 +13,6 @@ class Quiz {
 
     };
 
-    quizStart() {
-
-
-    };
-
-
     nextQuestion(){
         // stop game after 10'th question
         if(quiz.questionCounter >= 10){
@@ -54,9 +48,7 @@ class Quiz {
     };
 
 
-    setDifficulty(difficulty){
-        this.difficulty = difficulty;
-    }
+  
     setUsername(){
         let inputUsernameField=document.getElementById("input-username");
         if(inputUsernameField.value.length>2) {
@@ -191,25 +183,29 @@ function updateQuestionField(difficulty) {
 }
 
 // Function to check if the user's selected answer is correct
-function checkAnswer(game, selectedAnswer, correctAnswer) {
+function checkAnswer(game, selectedAnswer, correctAnswer, firstCheck = 0) {
     // Check if the selected answer is correct
     if (selectedAnswer === correctAnswer) {
-        // increase the difficulty of the next question
-        if (game.prev_question_difficulty === "easy") {
-            game.prev_question_difficulty = "medium";
-        } else if (game.prev_question_difficulty === "medium") {
-            game.prev_question_difficulty = "hard";
-        } // if "hard", then it will remain "hard" for the next question
-        // Return 1 if the answer is correct
+        if(firstCheck === 1) {
+            // increase the difficulty of the next question
+            if (game.prev_question_difficulty === "easy") {
+                game.prev_question_difficulty = "medium";
+            } else if (game.prev_question_difficulty === "medium") {
+                game.prev_question_difficulty = "hard";
+            } // if "hard", then it will remain "hard" for the next question
+            // Return 1 if the answer is correct
+        }
         return 1;
     } else {
-        // decrease the difficulty of the next question
-        if (game.prev_question_difficulty === "hard") {
-            game.prev_question_difficulty = "medium";
-        } else if (game.prev_question_difficulty === "medium") {
-            game.prev_question_difficulty = "easy";
-        } // if "easy", then it will remain "easy" for the next question
-        // Return 0 if the answer is incorrect
+        if(firstCheck === 1) {
+            // decrease the difficulty of the next question
+            if (game.prev_question_difficulty === "hard") {
+                game.prev_question_difficulty = "medium";
+            } else if (game.prev_question_difficulty === "medium") {
+                game.prev_question_difficulty = "easy";
+            } // if "easy", then it will remain "easy" for the next question
+            // Return 0 if the answer is incorrect
+        }
         return 0;
     }
 }
@@ -268,7 +264,7 @@ document.addEventListener("DOMContentLoaded", function() {
             quiz.setAnswered();
             
             // check if the A button currently holds the correct answer
-            let result = checkAnswer(quiz, A_Button.innerHTML, `A) ${convertedAnswerText(correctAnswer)}`);
+            let result = checkAnswer(quiz, A_Button.innerHTML, `A) ${convertedAnswerText(correctAnswer)}`, 1);
             // change button color to red if it is the wrong answer, green if right answer
             if (result === 1) {
                 A_Button.classList.add('correct-answer');
@@ -299,7 +295,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // set answered status so button can't be used again
             quiz.setAnswered();
             // check if the B button currently holds the correct answer
-            let result = checkAnswer(quiz, B_Button.innerHTML, `B) ${convertedAnswerText(correctAnswer)}`);
+            let result = checkAnswer(quiz, B_Button.innerHTML, `B) ${convertedAnswerText(correctAnswer)}`, 1);
             // change button color to red if it is the wrong answer, green if right answer
             if (result === 1) {
                 B_Button.classList.add('correct-answer');
@@ -330,7 +326,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // set answered status so button can't be used again
             quiz.setAnswered();
             // check if the C button currently holds the correct answer
-            let result = checkAnswer(quiz, C_Button.innerHTML, `C) ${convertedAnswerText(correctAnswer)}`);
+            let result = checkAnswer(quiz, C_Button.innerHTML, `C) ${convertedAnswerText(correctAnswer)}`, 1);
             // change button color to red if it is the wrong answer, green if right answer
             if (result === 1) {
                 C_Button.classList.add('correct-answer');
@@ -361,7 +357,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // set answered status so button can't be used again
             quiz.setAnswered();
             // check if the D button currently holds the correct answer
-            let result = checkAnswer(quiz, D_Button.innerHTML, `D) ${convertedAnswerText(correctAnswer)}`);
+            let result = checkAnswer(quiz, D_Button.innerHTML, `D) ${convertedAnswerText(correctAnswer)}`, 1);
             // change button color to red if it is the wrong answer, green if right answer
             if (result === 1) {
                 D_Button.classList.add('correct-answer');
