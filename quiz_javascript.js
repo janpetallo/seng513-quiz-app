@@ -35,7 +35,7 @@ class Quiz {
             if(this.questionCounter === 10){
                 nextQuestionButton.textContent = "Finish";
             }
-            updateQuestionField(this.prev_question_difficulty);
+            updateQuestionField.call(this, this.prev_question_difficulty);
         }
     };
 
@@ -140,7 +140,7 @@ async function fetchData(){
         }
 
         // update the question field to display the first EASY question
-        updateQuestionField(quiz.prev_question_difficulty);
+        updateQuestionField(quiz, quiz.prev_question_difficulty);
     } catch (error) {
         console.error(error);
     }
@@ -155,13 +155,13 @@ function updateQuestionField(difficulty) {
     // get the current question from the question bank
     if(difficulty === "easy"){
         question = question_bank_easy[quiz.easy_index];
-        quiz.easy_index++;
+        this.easy_index++;
     } else if(difficulty === "medium"){
         question = question_bank_medium[quiz.medium_index];
-        quiz.medium_index++;
+        this.medium_index++;
     } else {
         question = question_bank_hard[quiz.hard_index];
-        quiz.hard_index++;
+        this.hard_index++;
     }
     
     // display the question based on the question number
